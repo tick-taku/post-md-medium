@@ -34,3 +34,5 @@ with open(file, 'r') as f:
   }
 
   requests.post(post_url, headers=headers, json=json)
+
+print(f'{file} was posted to Medium!')
