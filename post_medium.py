@@ -1,9 +1,10 @@
+import secrets
 import requests
 import re
 from functools import reduce
 from operator import add
 
-integration_token = '<token>'
+integration_token = secrets.INTEGRATION_TOKEN
 
 file = input('file: ')
 publish_status = input('publishStatus: ') or 'draft'
