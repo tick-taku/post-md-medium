@@ -6,11 +6,22 @@ from operator import add
 
 integration_token = secrets.INTEGRATION_TOKEN
 
-file = input('file: ')
-publish_status = input('publishStatus: ') or 'draft'
+try:
+  file = input('file: ')
+  publish_status = input('publishStatus: ') or 'draft'
+except KeyboardInterrupt:
+  print('\n')
+  print('Cancelled.')
+  quit()
 
 user_id_res = requests.get('https://api.medium.com/v1/me', headers={ 'Authorization': f'Bearer {integration_token}' })
-user_id = user_id_res.json()['data']['id']
+
+try:
+  user_id = user_id_res.json()['data']['id']
+except KeyError:
+  print('\n')
+  print('You may have wrong token.')
+  quit()
 
 post_url = f'https://api.medium.com/v1/users/{user_id}/posts'
 
