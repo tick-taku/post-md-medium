@@ -1,3 +1,4 @@
+import sys
 import subprocess
 import shutil
 
@@ -13,11 +14,14 @@ with open('secrets.py', mode='w') as f:
   f.write(replace)
 
 
-pip_list = subprocess.Popen(['pip', 'list'], stdout=subprocess.PIPE)
-grep_requests = subprocess.Popen(['grep', 'requests'], stdin=pip_list.stdout, stdout=subprocess.PIPE)
-pip_list.stdout.close()
-if grep_requests.communicate()[0].decode() == '':
+if 'reqeusts' not in sys.modules:
   subprocess.run(['pip', 'install', 'requests'])
 
+
+#pip_list = subprocess.Popen(['pip', 'list'], stdout=subprocess.PIPE)
+#grep_requests = subprocess.Popen(['grep', 'requests'], stdin=pip_list.stdout, stdout=subprocess.PIPE)
+#pip_list.stdout.close()
+#if grep_requests.communicate()[0].decode() == '':
+#  subprocess.run(['pip', 'install', 'requests'])
 
 print('All green.')
