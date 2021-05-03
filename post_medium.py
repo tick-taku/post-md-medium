@@ -14,7 +14,6 @@ try:
     quit()
 
   publish_status = input('publishStatus: ') or 'draft'
-  print(publish_status)
   if not (publish_status == 'draft' or publish_status == 'public'):
     print('Input allowed draft or public.')
     quit()
