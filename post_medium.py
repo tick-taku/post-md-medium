@@ -1,4 +1,5 @@
 import secrets
+import os
 import requests
 import re
 from functools import reduce
@@ -8,10 +9,23 @@ integration_token = secrets.INTEGRATION_TOKEN
 
 try:
   file = input('file: ')
+  if not os.path.exists(file):
+    print(f'{file} does not exists.')
+    quit()
+
   publish_status = input('publishStatus: ') or 'draft'
+  print(publish_status)
+  if not (publish_status == 'draft' or publish_status == 'public'):
+    print('Input allowed draft or public.')
+    quit()
+
 except KeyboardInterrupt:
   print('\n')
   print('Cancelled.')
+  quit()
+
+except Exception:
+  print('Has error occured.')
   quit()
 
 user_id_res = requests.get('https://api.medium.com/v1/me', headers={ 'Authorization': f'Bearer {integration_token}' })
