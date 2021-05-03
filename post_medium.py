@@ -64,6 +64,7 @@ with open(file, 'r') as f:
     "publishStatus": publish_status
   }
 
-  requests.post(post_url, headers=headers, json=json)
+res = requests.post(post_url, headers=headers, json=json)
+article_url = res.json()['data']['url']
 
-print(f'{file} was posted to Medium!')
+print(f'{file} was posted to Medium! Article URL: "{article_url}"')
