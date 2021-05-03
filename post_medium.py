@@ -35,7 +35,13 @@ with open(file, 'r') as f:
 
   title = origin.splitlines()[0]
   tags = re.findall(r'#([^\s]+)', origin.splitlines()[2])
-  content = reduce(add, map(lambda m: m + "\n", origin.split('\n')[3:]))
+
+  if len(tags) != 0:
+    content_start = 3
+  else:
+    content_start = 2
+
+  content = reduce(add, map(lambda m: m + "\n", origin.split('\n')[content_start:]))
 
   json = {
     "title": title,
